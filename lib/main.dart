@@ -1,7 +1,11 @@
+import 'package:condorapp/login_screen.dart';
+import 'package:condorapp/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:condorapp/colors.dart';
+import 'package:condorapp/home_screen.dart';
 
 void main() {
-  runApp(CondorApp());
+  runApp(const CondorApp());
 }
 
 class CondorApp extends StatelessWidget {
@@ -11,7 +15,13 @@ class CondorApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BienvenidaScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const BienvenidaScreen(),  // Pantalla de bienvenida
+        '/home': (context) => HomeScreen(),
+        '/login': (context) => LoginScreen(), // Pantalla de inicio de sesión
+        '/register': (context) => RegisterScreen(), // Pantalla de registro
+      },
     );
   }
 }
@@ -25,7 +35,7 @@ class BienvenidaScreen extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF88A2BE), Color(0xFFB8CBE6)],
+            colors: [AppColors.darkBlue, AppColors.lightBlue],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -41,14 +51,36 @@ class BienvenidaScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
               const Text(
                 'Tu Guía Espiritual',
                 style: TextStyle(
                   fontSize: 18,
-                  color: Colors.white,
+                  color: AppColors.white,
+                ),
+              ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.white, // Color de fondo blanco
+                  iconColor: AppColors.darkBlue, // Color del texto azul oscuro
+                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30), // Bordes redondeados
+                  ),
+                ),
+                onPressed: () {
+                  // Navegación a la pantalla de inicio (HomeScreen)
+                  Navigator.pushNamed(context, '/home');
+                },
+                child: const Text(
+                  'Empieza ahora',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
