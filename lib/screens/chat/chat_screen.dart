@@ -1,3 +1,5 @@
+// lib/screens/chat/chat_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/chat_provider.dart';
@@ -14,8 +16,11 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Chat"),
-        backgroundColor: AppColors.background,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
       ),
+      backgroundColor: AppColors.background,
       body: Column(
         children: [
           Expanded(
@@ -51,9 +56,9 @@ class ChatScreen extends StatelessWidget {
                   child: TextField(
                     controller: _messageController,
                     decoration: InputDecoration(
-                      hintText: "Write a message...",
+                      hintText: "Escribe un mensaje...",
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: Colors.grey[200],
                       contentPadding: EdgeInsets.symmetric(horizontal: 16),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -77,9 +82,8 @@ class ChatScreen extends StatelessWidget {
                   },
                   child: Icon(Icons.send),
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16), backgroundColor: AppColors.primary,
                     shape: CircleBorder(),
-                    foregroundColor: AppColors.primary,
                   ),
                 ),
               ],

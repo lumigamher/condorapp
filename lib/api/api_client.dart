@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class ApiClient {
-  static const String baseUrl = 'https://api.example.com/api'; // Cambia por la URL de tu API
+  static const String baseUrl = 'http://10.0.2.2:8081/api'; // Cambia por la URL de tu API
   final Dio dio = Dio(BaseOptions(baseUrl: baseUrl));
 
   ApiClient() {

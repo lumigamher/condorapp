@@ -56,7 +56,7 @@ class SplashScreen extends StatelessWidget {
               SizedBox(height: 24),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/signup');
+                  Navigator.pushNamed(context, '/register');
                 },
                 child: Text(
                   "¿No tienes una cuenta? Crea una cuenta",
@@ -87,8 +87,8 @@ class SplashScreen extends StatelessWidget {
             child: Center(
               child: SvgPicture.asset(
                 assetName,
-                width: 24,
-                height: 24,
+                width: 30,
+                height: 30,
                 placeholderBuilder: (context) => CircularProgressIndicator(),
               ),
             ),

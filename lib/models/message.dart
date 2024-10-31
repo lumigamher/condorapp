@@ -1,3 +1,5 @@
+// lib/models/message.dart
+
 class Message {
   final String content;
   final bool fromAI;
@@ -11,5 +13,11 @@ class Message {
     'conversationId': conversationId,
   };
 
-  static fromJson(msg) {}
+  static Message fromJson(Map<String, dynamic> json) {
+    return Message(
+      content: json['content'],
+      fromAI: json['fromAI'],
+      conversationId: json['conversationId'],
+    );
+  }
 }

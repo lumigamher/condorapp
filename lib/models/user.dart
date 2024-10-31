@@ -1,3 +1,5 @@
+// lib/models/user.dart
+
 class User {
   final String username;
   final String email;
@@ -23,6 +25,13 @@ class User {
 
   Map<String, dynamic> toJson() => {
     'username': username,
+    'email': email,
     'password': password,
+    'firstName': firstName,
+    'lastName': lastName,
+    'phone': phone,
+    'address': address,
+    'birthDate': birthDate?.toIso8601String(),
+    'gender': gender,
   };
 }

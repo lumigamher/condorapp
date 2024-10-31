@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primary = Color(0xFF88C9BF); // Verde calmante
-  static const Color secondary = Color(0xFFB1E5D3); // Verde claro
-  static const Color background = Color(0xFFF5F5F5); // Fondo suave gris
-  static const Color accent = Color(0xFF5C6BC0); // Azul suave para énfasis
-  static const Color textPrimary = Color(0xFF424242); // Gris oscuro para texto
+  static const Color primary = Color(0xFFA8A29E); // Gris/beige cálido
+  static const Color secondary = Color(0xFFD6D3D1); // Gris muy claro
+  static const Color background = Color(0xFFF9F9F8); // Fondo casi blanco
+  static const Color accent = Color(0xFFE07A5F); // Terracota suave para énfasis
+  static const Color textPrimary = Color(0xFF333333); // Gris oscuro para texto
 }
 
 class AppTheme {
@@ -55,7 +55,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
-          backgroundColor: AppColors.primary,
+          backgroundColor: AppColors.accent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

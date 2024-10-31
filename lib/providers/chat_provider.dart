@@ -1,3 +1,5 @@
+// lib/providers/chat_provider.dart
+
 import 'package:flutter/material.dart';
 import '../api/chat_api.dart';
 import '../models/message.dart';
@@ -24,7 +26,7 @@ class ChatProvider with ChangeNotifier {
     try {
       final response = await chatAPI.getChatHistory(userId);
       if (response.statusCode == 200) {
-        messages = response.data.map((msg) => Message.fromJson(msg)).toList();
+        messages = (response.data as List).map((msg) => Message.fromJson(msg)).toList();
         notifyListeners();
       }
     } catch (e) {

@@ -1,7 +1,9 @@
+// lib/providers/auth_provider.dart
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../api/auth_api.dart';
 import '../models/user.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
   final AuthAPI authAPI;
@@ -31,7 +33,6 @@ class AuthProvider with ChangeNotifier {
     try {
       final response = await authAPI.signup(user);
       if (response.statusCode == 200) {
-        // Maneja el registro exitoso si necesitas hacer algo más
         notifyListeners();
       }
     } catch (e) {

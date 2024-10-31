@@ -5,12 +5,12 @@ import 'package:condorapp/models/user.dart';
 import 'package:condorapp/providers/auth_provider.dart';
 import 'package:intl/intl.dart';
 
-class SignupScreen extends StatefulWidget {
+class SignupFormScreen extends StatefulWidget {
   @override
-  _SignupScreenState createState() => _SignupScreenState();
+  _SignupFormScreenState createState() => _SignupFormScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignupFormScreenState extends State<SignupFormScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
@@ -63,48 +63,26 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Form(
           key: _formKey,
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Información Personal
-              Text(
-                "Información Personal",
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              SizedBox(height: 16),
-
-              // Nombre
               TextFormField(
                 controller: _firstNameController,
-                decoration: InputDecoration(labelText: "Nombre", prefixIcon: Icon(Icons.person_outline)),
+                decoration: InputDecoration(labelText: "Nombre"),
                 validator: (value) => value?.isEmpty ?? true ? 'Ingresa tu nombre' : null,
               ),
               SizedBox(height: 16),
 
-              // Apellidos
               TextFormField(
                 controller: _lastNameController,
-                decoration: InputDecoration(labelText: "Apellidos", prefixIcon: Icon(Icons.person_outline)),
+                decoration: InputDecoration(labelText: "Apellidos"),
                 validator: (value) => value?.isEmpty ?? true ? 'Ingresa tus apellidos' : null,
-              ),
-              SizedBox(height: 24),
-
-              // Información de Contacto
-              Text(
-                "Información de Contacto",
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
               ),
               SizedBox(height: 16),
 
-              // Email
               TextFormField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(labelText: "Correo electrónico", prefixIcon: Icon(Icons.email_outlined)),
+                decoration: InputDecoration(labelText: "Correo electrónico"),
                 validator: (value) {
                   if (value?.isEmpty ?? true) return 'Ingresa tu correo electrónico';
                   if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!)) return 'Correo electrónico inválido';
@@ -113,45 +91,31 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               SizedBox(height: 16),
 
-              // Teléfono
               TextFormField(
                 controller: _phoneController,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(labelText: "Teléfono", prefixIcon: Icon(Icons.phone_outlined)),
+                decoration: InputDecoration(labelText: "Teléfono"),
               ),
               SizedBox(height: 16),
 
-              // Dirección
               TextFormField(
                 controller: _addressController,
-                decoration: InputDecoration(labelText: "Dirección", prefixIcon: Icon(Icons.home_outlined)),
-              ),
-              SizedBox(height: 24),
-
-              // Información de Cuenta
-              Text(
-                "Información de Cuenta",
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                decoration: InputDecoration(labelText: "Dirección"),
               ),
               SizedBox(height: 16),
 
-              // Usuario
               TextFormField(
                 controller: _usernameController,
-                decoration: InputDecoration(labelText: "Nombre de usuario", prefixIcon: Icon(Icons.account_circle_outlined)),
+                decoration: InputDecoration(labelText: "Nombre de usuario"),
                 validator: (value) => value?.isEmpty ?? true ? 'Ingresa un nombre de usuario' : null,
               ),
               SizedBox(height: 16),
 
-              // Contraseña
               TextFormField(
                 controller: _passwordController,
                 obscureText: _obscurePassword,
                 decoration: InputDecoration(
                   labelText: "Contraseña",
-                  prefixIcon: Icon(Icons.lock_outline),
                   suffixIcon: IconButton(
                     icon: Icon(_obscurePassword ? Icons.visibility : Icons.visibility_off),
                     onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
@@ -165,13 +129,11 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               SizedBox(height: 16),
 
-              // Confirmar Contraseña
               TextFormField(
                 controller: _confirmPasswordController,
                 obscureText: _obscureConfirmPassword,
                 decoration: InputDecoration(
                   labelText: "Confirmar contraseña",
-                  prefixIcon: Icon(Icons.lock_outline),
                   suffixIcon: IconButton(
                     icon: Icon(_obscureConfirmPassword ? Icons.visibility : Icons.visibility_off),
                     onPressed: () => setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
@@ -182,36 +144,19 @@ class _SignupScreenState extends State<SignupScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 24),
-
-              // Información Adicional
-              Text(
-                "Información Adicional",
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
               SizedBox(height: 16),
 
-              // Fecha de Nacimiento
               TextFormField(
                 controller: _birthDateController,
                 readOnly: true,
                 onTap: () => _selectDate(context),
-                decoration: InputDecoration(
-                  labelText: "Fecha de nacimiento",
-                  prefixIcon: Icon(Icons.calendar_today_outlined),
-                ),
+                decoration: InputDecoration(labelText: "Fecha de nacimiento"),
               ),
               SizedBox(height: 16),
 
-              // Género
               DropdownButtonFormField<String>(
                 value: _selectedGender,
-                decoration: InputDecoration(
-                  labelText: "Género",
-                  prefixIcon: Icon(Icons.person_outline),
-                ),
+                decoration: InputDecoration(labelText: "Género"),
                 items: [
                   DropdownMenuItem(value: "M", child: Text("Masculino")),
                   DropdownMenuItem(value: "F", child: Text("Femenino")),
@@ -222,7 +167,6 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               SizedBox(height: 32),
 
-              // Botón de registro
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -242,13 +186,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   }
                 },
                 child: Text("Crear cuenta"),
-              ),
-              SizedBox(height: 16),
-
-              // Enlace para iniciar sesión
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text("¿Ya tienes una cuenta? Inicia sesión"),
               ),
             ],
           ),
