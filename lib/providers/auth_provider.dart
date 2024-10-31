@@ -1,9 +1,7 @@
-// lib/providers/auth_provider.dart
-
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../api/auth_api.dart';
 import '../models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
   final AuthAPI authAPI;
@@ -15,7 +13,7 @@ class AuthProvider with ChangeNotifier {
   bool get isAuthenticated => _isAuthenticated;
   String get token => _token;
 
-  Future<void> login(User user) async {
+  Future<void> login(User user, BuildContext context) async {
     try {
       final response = await authAPI.login(user);
       if (response.statusCode == 200 && response.data['token'] != null) {
@@ -23,28 +21,37 @@ class AuthProvider with ChangeNotifier {
         _isAuthenticated = true;
         await saveToken(_token);
         notifyListeners();
+
+        // Redirigir al chat una vez autenticado
+        Navigator.pushReplacementNamed(context, '/chat');
       }
     } catch (e) {
       print("Error en login: $e");
     }
   }
 
-  Future<void> signup(User user) async {
+  Future<bool> signup(User user) async {
     try {
       final response = await authAPI.signup(user);
       if (response.statusCode == 200) {
-        notifyListeners();
+        // Registro exitoso
+        return true;
       }
     } catch (e) {
-      print("Error en signup: $e");
+      print("Error en el registro: $e");
     }
+    // Retorna false en caso de fallo
+    return false;
   }
 
-  Future<void> logout() async {
+  Future<void> logout(BuildContext context) async {
     _token = '';
     _isAuthenticated = false;
     await removeToken();
     notifyListeners();
+
+    // Redirigir al login después de cerrar sesión
+    Navigator.pushReplacementNamed(context, '/login');
   }
 
   Future<void> saveToken(String token) async {

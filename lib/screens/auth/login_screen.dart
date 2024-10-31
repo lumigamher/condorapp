@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     firstName: '',
                     lastName: '',
                   );
-                  authProvider.login(user);
+                  authProvider.login(user, context);
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 16),

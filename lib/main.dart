@@ -32,18 +32,23 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider(AuthAPI(apiClient))),
         ChangeNotifierProvider(create: (_) => ChatProvider(ChatAPI(apiClient))),
       ],
-      child: MaterialApp(
-        title: 'Mi Señor Jesus Chat App',
-        theme: AppTheme.lightTheme,
-        initialRoute: '/login',
-        routes: {
-          '/': (context) => SplashScreen(),
-          '/login': (context) => LoginScreen(),
-          '/register': (context) => RegisterScreen(),
-          '/signup_form': (context) => SignupFormScreen(),
-          '/chat': (context) => ChatScreen(), // Añadida la ruta al chat
+      child: Consumer<AuthProvider>(
+        builder: (context, authProvider, child) {
+          return MaterialApp(
+            title: 'Mi Señor Jesus Chat App',
+            theme: AppTheme.lightTheme,
+            initialRoute: authProvider.isAuthenticated ? '/chat' : '/login',  // Redirige según autenticación
+            routes: {
+              '/': (context) => SplashScreen(),
+              '/login': (context) => LoginScreen(),
+              '/register': (context) => RegisterScreen(),
+              '/signup_form': (context) => SignupFormScreen(),
+              '/chat': (context) => ChatScreen(),
+            },
+          );
         },
       ),
     );
   }
 }
+

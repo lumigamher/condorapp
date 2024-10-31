@@ -1,14 +1,13 @@
 import 'package:dio/dio.dart';
 
 class ApiClient {
-  static const String baseUrl = 'http://10.0.2.2:8081/api'; // Cambia por la URL de tu API
+  static const String baseUrl = 'http://localhost:8081/api';
   final Dio dio = Dio(BaseOptions(baseUrl: baseUrl));
 
   ApiClient() {
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
-        // Si tienes un token, agrégalo a los encabezados
-        String token = getToken(); // Crea una función para obtener el token dinámicamente
+        String token = getToken(); 
         if (token.isNotEmpty) {
           options.headers['Authorization'] = 'Bearer $token';
         }

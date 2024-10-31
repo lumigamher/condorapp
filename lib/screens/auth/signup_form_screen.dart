@@ -168,7 +168,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
               SizedBox(height: 32),
 
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     final user = User(
                       username: _usernameController.text,
@@ -181,8 +181,19 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                       birthDate: _selectedDate,
                       gender: _selectedGender,
                     );
-                    authProvider.signup(user);
-                    Navigator.pop(context);
+
+                    // Llamar al método signup y esperar a que se complete
+                    bool isRegistered = await authProvider.signup(user);
+                    
+                    // Redirige al login solo si el registro fue exitoso
+                    if (isRegistered) {
+                      Navigator.pushReplacementNamed(context, '/login');
+                    } else {
+                      // Mostrar un mensaje de error si el registro falló
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Error en el registro. Inténtalo de nuevo."))
+                      );
+                    }
                   }
                 },
                 child: Text("Crear cuenta"),
