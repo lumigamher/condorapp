@@ -32,6 +32,9 @@ dependencies:
   # SVG handling for assets
   flutter_svg: ^1.0.3
 
+  flutter_animate: ^4.4.0
+  lucide_icons: ^0.257.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
