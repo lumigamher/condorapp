@@ -1,81 +1,49 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiClient {
-  static const String baseUrl = 'http://localhost:8081/api';
-  final Dio dio = Dio(BaseOptions(baseUrl: baseUrl));
-
+  late Dio dio;
+  
   ApiClient() {
-    dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
-        String token = getToken(); 
-        if (token.isNotEmpty) {
-          options.headers['Authorization'] = 'Bearer $token';
-        }
-        return handler.next(options);
-      },
-      onResponse: (response, handler) {
-        return handler.next(response);
-      },
-      onError: (DioException e, handler) {
-        if (e.response != null && e.response?.statusCode == 401) {
-          // Maneja errores de autenticación
-          print("Error de autenticación: ${e.response?.statusCode}");
-        } else {
-          // Otros errores
-          print("Error: ${e.message}");
-        }
-        return handler.next(e);
-      },
-    ));
+    dio = Dio(
+      BaseOptions(
+        baseUrl: 'http://localhost:8081',  // Quitamos /api de aquí
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        validateStatus: (status) {
+          return status! < 500;  // Permite códigos 4xx para manejarlos manualmente
+        },
+      ),
+    );
+
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          print('Realizando petición a: ${options.uri}');
+          final token = await getToken();
+          if (token.isNotEmpty) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+          return handler.next(options);
+        },
+        onError: (DioException e, handler) {
+          print('Error en la petición:');
+          print('URL: ${e.requestOptions.uri}');
+          print('Método: ${e.requestOptions.method}');
+          print('Status code: ${e.response?.statusCode}');
+          print('Response: ${e.response?.data}');
+          return handler.next(e);
+        },
+      ),
+    );
   }
 
-  // Métodos para realizar solicitudes HTTP comunes
-  Future<Response> getRequest(String endpoint, {Map<String, dynamic>? queryParams}) async {
-    try {
-      return await dio.get(endpoint, queryParameters: queryParams);
-    } on DioException catch (e) {
-      return handleError(e);
-    }
-  }
+  get baseUrl => null;
 
-  Future<Response> postRequest(String endpoint, dynamic data) async {
-    try {
-      return await dio.post(endpoint, data: data);
-    } on DioException catch (e) {
-      return handleError(e);
-    }
-  }
-
-  Future<Response> putRequest(String endpoint, dynamic data) async {
-    try {
-      return await dio.put(endpoint, data: data);
-    } on DioException catch (e) {
-      return handleError(e);
-    }
-  }
-
-  Future<Response> deleteRequest(String endpoint) async {
-    try {
-      return await dio.delete(endpoint);
-    } on DioException catch (e) {
-      return handleError(e);
-    }
-  }
-
-  // Método auxiliar para manejar errores
-  Response handleError(DioException e) {
-    if (e.response != null) {
-      print("Error en la solicitud: ${e.response?.statusCode} - ${e.response?.statusMessage}");
-      return e.response!;
-    } else {
-      print("Error de conexión o solicitud: ${e.message}");
-      throw Exception("Error de conexión o solicitud");
-    }
-  }
-
-  // Ejemplo de función para obtener el token
-  String getToken() {
-    // Aquí deberías obtener el token desde un almacenamiento seguro, como SharedPreferences o SecureStorage
-    return "tu_token";
+  Future<String> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('auth_token') ?? '';
   }
 }
