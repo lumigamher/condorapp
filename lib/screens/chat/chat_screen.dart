@@ -10,6 +10,8 @@ import '../../theme.dart';
 
 
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -32,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (_scrollController.hasClients) {
       _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeOut,
       );
     }
@@ -73,7 +75,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 if (chatProvider.error != null)
                   Container(
                     color: theme.colorScheme.error.withOpacity(0.1),
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: Row(
                       children: [
                         Expanded(
@@ -94,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 Expanded(
                   child: ListView.builder(
                     controller: _scrollController,
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                     itemCount: chatProvider.messages.length,
                     itemBuilder: (context, index) {
                       return MessageBubble(
@@ -136,49 +138,54 @@ class _ChatScreenState extends State<ChatScreen> {
       child: Row(
         children: [
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.background,
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(
-                  color: AppColors.accent.withOpacity(0.2),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _messageController,
-                      decoration: InputDecoration(
-                        hintText: "Escribe un mensaje...",
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(16),
-                        hintStyle: TextStyle(color: AppColors.primary.withOpacity(0.5)),
-                      ),
-                      enabled: !chatProvider.isLoading,
-                      onSubmitted: (text) {
-                        if (!chatProvider.isLoading) {
-                          _sendMessage(chatProvider);
-                        }
-                      },
-                    ),
+            child: Material(
+              color: AppColors.background,
+              borderRadius: BorderRadius.circular(24),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(
+                    color: AppColors.accent.withOpacity(0.3),
                   ),
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
-                    margin: EdgeInsets.only(right: 8),
-                    child: IconButton(
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: TextField(
+                          controller: _messageController,
+                          decoration: InputDecoration(
+                            hintText: "Escribe un mensaje...",
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(vertical: 12),
+                            hintStyle: TextStyle(
+                              color: AppColors.primary.withOpacity(0.5),
+                            ),
+                          ),
+                          enabled: !chatProvider.isLoading,
+                          onSubmitted: (text) {
+                            if (!chatProvider.isLoading) {
+                              _sendMessage(chatProvider);
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                    IconButton(
                       onPressed: chatProvider.isLoading 
                         ? null 
                         : () => _sendMessage(chatProvider),
                       icon: Icon(
-                        LucideIcons.send,
+                        Icons.send_rounded,
                         color: chatProvider.isLoading
                             ? AppColors.primary.withOpacity(0.5)
                             : AppColors.accent,
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(width: 8),
+                  ],
+                ),
               ),
             ),
           ),
@@ -191,7 +198,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (_messageController.text.trim().isNotEmpty) {
       chatProvider.sendMessage(_messageController.text);
       _messageController.clear();
-      Future.delayed(Duration(milliseconds: 100), _scrollToBottom);
+      Future.delayed(const Duration(milliseconds: 100), _scrollToBottom);
     }
   }
 

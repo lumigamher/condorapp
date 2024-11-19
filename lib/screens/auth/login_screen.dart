@@ -7,6 +7,8 @@ import 'package:condorapp/providers/auth_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -23,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
       data: AppTheme.lightTheme,
       child: Scaffold(
         appBar: AppBar(
-          title: Center(child: Text("Iniciar Sesión")),
+          title: const Center(child: Text("Iniciar Sesión")),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
@@ -33,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // Logo o título de la app
-              Center(
+              const Center(
                 child: Text(
                   "Mi Señor Jesús",
                   style: TextStyle(
@@ -43,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
 
               // Campos de inicio de sesión sin bordes
               TextField(
@@ -55,10 +57,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   border: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
@@ -68,11 +70,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   border: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
                 obscureText: true,
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               // Botón de inicio de sesión
               ElevatedButton(
@@ -87,14 +89,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   authProvider.login(user, context);
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: Text("Iniciar Sesión", style: TextStyle(fontSize: 16)),
+                child: const Text("Iniciar Sesión", style: TextStyle(fontSize: 16)),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               // Texto para redes sociales
               Center(
@@ -106,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // Botones de redes sociales
               Row(
@@ -115,17 +117,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   _buildSocialButton('assets/google.svg', () {
                     // Lógica para iniciar sesión con Google
                   }),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   _buildSocialButton('assets/facebook.svg', () {
                     // Lógica para iniciar sesión con Facebook
                   }),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   _buildSocialButton('assets/apple.svg', () {
                     // Lógica para iniciar sesión con Apple
                   }),
                 ],
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
 
               // Enlace para registrarse
               Center(
@@ -133,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     Navigator.pushNamed(context, '/register');
                   },
-                  child: Text(
+                  child: const Text(
                     "¿No tienes una cuenta? Regístrate",
                     style: TextStyle(
                       color: AppColors.accent,
@@ -168,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 assetName,
                 width: 30,
                 height: 30,
-                placeholderBuilder: (context) => CircularProgressIndicator(),
+                placeholderBuilder: (context) => const CircularProgressIndicator(),
               ),
             ),
           ),

@@ -4,11 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../theme.dart';
 
 class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Registrarse"),
+        title: const Text("Registrarse"),
         centerTitle: true,
       ),
       body: Padding(
@@ -17,12 +19,12 @@ class RegisterScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
+            const Text(
               "Crea una cuenta",
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.primary),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             
             // Botones de redes sociales
             Row(
@@ -31,30 +33,30 @@ class RegisterScreen extends StatelessWidget {
                 _buildSocialButton('assets/google.svg', () {
                   // Lógica para registro con Google
                 }),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 _buildSocialButton('assets/facebook.svg', () {
                   // Lógica para registro con Facebook
                 }),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 _buildSocialButton('assets/apple.svg', () {
                   // Lógica para registro con Apple
                 }),
               ],
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             
             // Texto alternativo para crear cuenta con formulario
-            Text(
+            const Text(
               "O crea una cuenta aquí",
               style: TextStyle(color: AppColors.textPrimary, fontSize: 16),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/signup_form');
               },
-              child: Text("Crear cuenta"),
+              child: const Text("Crear cuenta"),
             ),
           ],
         ),
@@ -82,7 +84,7 @@ class RegisterScreen extends StatelessWidget {
                 assetName,
                 width: 28,
                 height: 28,
-                placeholderBuilder: (context) => CircularProgressIndicator(),
+                placeholderBuilder: (context) => const CircularProgressIndicator(),
               ),
             ),
           ),

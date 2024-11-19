@@ -7,19 +7,19 @@ class MessageBubble extends StatelessWidget {
   final Message message;
 
   const MessageBubble({
-    Key? key,
+    super.key,
     required this.message,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     final isAI = message.fromAI;
     final bubbleColor = isAI 
-        ? Color(0xFF3A506B) // Azul oscuro elegante para respuestas AI
+        ? const Color(0xFF3A506B) // Azul oscuro elegante para respuestas AI
         : AppColors.accent;  // Color accent para mensajes del usuario
 
     return Padding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 4,
       ),
@@ -33,8 +33,8 @@ class MessageBubble extends StatelessWidget {
             decoration: BoxDecoration(
               color: bubbleColor,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+                topLeft: const Radius.circular(20),
+                topRight: const Radius.circular(20),
                 bottomLeft: Radius.circular(isAI ? 0 : 20),
                 bottomRight: Radius.circular(isAI ? 20 : 0),
               ),
@@ -42,23 +42,23 @@ class MessageBubble extends StatelessWidget {
                 BoxShadow(
                   color: bubbleColor.withOpacity(0.1),
                   blurRadius: 10,
-                  offset: Offset(0, 5),
+                  offset: const Offset(0, 5),
                 ),
               ],
             ),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   message.content,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     height: 1.4,
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   _formatTimestamp(message.timestamp ?? DateTime.now()),
                   style: TextStyle(

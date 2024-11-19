@@ -44,12 +44,12 @@ class MyApp extends StatelessWidget {
   final AuthProvider initialAuthProvider;
 
   const MyApp({
-    Key? key,
+    super.key,
     required this.apiClient,
     required this.authAPI,
     required this.chatAPI,
     required this.initialAuthProvider,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +110,7 @@ class MyApp extends StatelessWidget {
                   if (authProvider.isLoading)
                     Container(
                       color: Colors.black54,
-                      child: Center(
+                      child: const Center(
                         child: CircularProgressIndicator(),
                       ),
                     ),
@@ -165,6 +165,8 @@ class AppRoutes {
 
 // Widget para manejar la carga inicial y verificación de autenticación
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -178,7 +180,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _checkAuthentication() async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    await Future.delayed(Duration(seconds: 2)); // Simular carga inicial
+    await Future.delayed(const Duration(seconds: 2)); // Simular carga inicial
     
     if (mounted) {
       if (authProvider.isAuthenticated) {
@@ -193,7 +195,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

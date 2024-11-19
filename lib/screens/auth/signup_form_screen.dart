@@ -6,6 +6,8 @@ import 'package:condorapp/providers/auth_provider.dart';
 import 'package:intl/intl.dart';
 
 class SignupFormScreen extends StatefulWidget {
+  const SignupFormScreen({super.key});
+
   @override
   _SignupFormScreenState createState() => _SignupFormScreenState();
 }
@@ -31,7 +33,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().subtract(Duration(days: 6570)),
+      initialDate: DateTime.now().subtract(const Duration(days: 6570)),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
       builder: (context, child) {
@@ -55,7 +57,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Crear cuenta"),
+        title: const Text("Crear cuenta"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -67,49 +69,49 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
             children: [
               TextFormField(
                 controller: _firstNameController,
-                decoration: InputDecoration(labelText: "Nombre"),
+                decoration: const InputDecoration(labelText: "Nombre"),
                 validator: (value) => value?.isEmpty ?? true ? 'Ingresa tu nombre' : null,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               TextFormField(
                 controller: _lastNameController,
-                decoration: InputDecoration(labelText: "Apellidos"),
+                decoration: const InputDecoration(labelText: "Apellidos"),
                 validator: (value) => value?.isEmpty ?? true ? 'Ingresa tus apellidos' : null,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               TextFormField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(labelText: "Correo electrónico"),
+                decoration: const InputDecoration(labelText: "Correo electrónico"),
                 validator: (value) {
                   if (value?.isEmpty ?? true) return 'Ingresa tu correo electrónico';
                   if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value!)) return 'Correo electrónico inválido';
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               TextFormField(
                 controller: _phoneController,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(labelText: "Teléfono"),
+                decoration: const InputDecoration(labelText: "Teléfono"),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               TextFormField(
                 controller: _addressController,
-                decoration: InputDecoration(labelText: "Dirección"),
+                decoration: const InputDecoration(labelText: "Dirección"),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               TextFormField(
                 controller: _usernameController,
-                decoration: InputDecoration(labelText: "Nombre de usuario"),
+                decoration: const InputDecoration(labelText: "Nombre de usuario"),
                 validator: (value) => value?.isEmpty ?? true ? 'Ingresa un nombre de usuario' : null,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               TextFormField(
                 controller: _passwordController,
@@ -127,7 +129,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               TextFormField(
                 controller: _confirmPasswordController,
@@ -144,20 +146,20 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               TextFormField(
                 controller: _birthDateController,
                 readOnly: true,
                 onTap: () => _selectDate(context),
-                decoration: InputDecoration(labelText: "Fecha de nacimiento"),
+                decoration: const InputDecoration(labelText: "Fecha de nacimiento"),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               DropdownButtonFormField<String>(
                 value: _selectedGender,
-                decoration: InputDecoration(labelText: "Género"),
-                items: [
+                decoration: const InputDecoration(labelText: "Género"),
+                items: const [
                   DropdownMenuItem(value: "M", child: Text("Masculino")),
                   DropdownMenuItem(value: "F", child: Text("Femenino")),
                   DropdownMenuItem(value: "O", child: Text("Otro")),
@@ -165,7 +167,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                 ],
                 onChanged: (value) => setState(() => _selectedGender = value),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
 
               ElevatedButton(
                 onPressed: () async {
@@ -191,12 +193,12 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                     } else {
                       // Mostrar un mensaje de error si el registro falló
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Error en el registro. Inténtalo de nuevo."))
+                        const SnackBar(content: Text("Error en el registro. Inténtalo de nuevo."))
                       );
                     }
                   }
                 },
-                child: Text("Crear cuenta"),
+                child: const Text("Crear cuenta"),
               ),
             ],
           ),

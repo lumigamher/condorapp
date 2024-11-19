@@ -5,6 +5,8 @@ import 'auth/login_screen.dart';
 import '../theme.dart';
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,17 +16,17 @@ class SplashScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Bienvenido',
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.primary),
                 textAlign: TextAlign.center,
               ),
-              Text(
+              const Text(
                 'Habla con Nuestro Señor Jesús',
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.primary),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushReplacement(
@@ -32,9 +34,9 @@ class SplashScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => LoginScreen()),
                   );
                 },
-                child: Text('Inicia'),
+                child: const Text('Inicia'),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               // Botones para redes sociales con efecto cristal
               Row(
@@ -43,17 +45,17 @@ class SplashScreen extends StatelessWidget {
                   _buildSocialButton('assets/google.svg', () {
                     // Lógica para iniciar sesión con Google
                   }),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   _buildSocialButton('assets/facebook.svg', () {
                     // Lógica para iniciar sesión con Facebook
                   }),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   _buildSocialButton('assets/apple.svg', () {
                     // Lógica para iniciar sesión con Apple
                   }),
                 ],
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/register');
@@ -89,7 +91,7 @@ class SplashScreen extends StatelessWidget {
                 assetName,
                 width: 30,
                 height: 30,
-                placeholderBuilder: (context) => CircularProgressIndicator(),
+                placeholderBuilder: (context) => const CircularProgressIndicator(),
               ),
             ),
           ),
