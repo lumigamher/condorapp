@@ -58,7 +58,7 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: theme.scaffoldBackgroundColor,
         actions: [
           PopupMenuButton<String>(
-            icon: Icon(LucideIcons.moreVertical, color: AppColors.accent),
+            icon: const Icon(LucideIcons.moreVertical, color: AppColors.accent),
             onSelected: (value) {
               switch (value) {
                 case 'clear':
@@ -73,7 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
               }
             },
             itemBuilder: (BuildContext context) => [
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: 'new',
                 child: Row(
                   children: [
@@ -83,7 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ],
                 ),
               ),
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: 'clear',
                 child: Row(
                   children: [
@@ -93,8 +93,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   ],
                 ),
               ),
-              PopupMenuDivider(),
-              PopupMenuItem(
+              const PopupMenuDivider(),
+              const PopupMenuItem(
                 value: 'logout',
                 child: Row(
                   children: [
@@ -163,7 +163,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 ),
                 if (chatProvider.isLoading)
-                  TypingIndicator().animate().fadeIn(),
+                  const TypingIndicator().animate().fadeIn(),
                 _buildInputArea(chatProvider, theme),
               ],
             );
@@ -175,7 +175,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildInputArea(ChatProvider chatProvider, ThemeData theme) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Row(
         children: [
           Expanded(
@@ -190,7 +190,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: TextField(
                         controller: _messageController,
                         decoration: InputDecoration(
@@ -200,7 +200,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           focusedBorder: InputBorder.none,
                           fillColor: Colors.transparent,
                           filled: false,
-                          contentPadding: EdgeInsets.symmetric(vertical: 12),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 12),
                           hintStyle: TextStyle(
                             color: AppColors.primary.withOpacity(0.5),
                           ),
@@ -225,7 +225,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           : AppColors.accent,
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                 ],
               ),
             ),

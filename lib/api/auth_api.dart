@@ -7,28 +7,56 @@ class AuthAPI {
 
   AuthAPI(this._apiClient);
 
-  Future<Response> login(User user) async {
+  Future<Response> signup(User user) async {
     try {
+      print('Enviando datos de registro: ${user.toJson()}');
+      
       final response = await _apiClient.dio.post(
-        '/api/auth/login', // Asegúrate de que incluya '/api' al inicio
+        '/api/auth/signup',
         data: user.toJson(),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
       );
+
+      print('Respuesta del servidor: ${response.data}');
       return response;
-    } catch (e) {
-      print("Error en AuthAPI.login: $e");
+      
+    } on DioException catch (e) {
+      print('Error en AuthAPI.signup: $e');
+      print('Response data: ${e.response?.data}');
       rethrow;
     }
   }
 
-  Future<Response> signup(User user) async {
+  Future<Response> login(User user) async {
     try {
       final response = await _apiClient.dio.post(
-        '/api/auth/signup', // Asegúrate de que incluya '/api' al inicio
+        '/api/auth/login',
         data: user.toJson(),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
       );
+      
+      print('Respuesta de login: ${response.data}');
       return response;
-    } catch (e) {
-      print("Error en AuthAPI.signup: $e");
+      
+    } on DioException catch (e) {
+      print('Error en AuthAPI.login: $e');
+      print('Response data: ${e.response?.data}');
       rethrow;
     }
   }

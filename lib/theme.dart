@@ -33,8 +33,6 @@ class AppTheme {
         onError: Colors.white,
         tertiary: AppColors.accent,
         onTertiary: Colors.white,
-        background: AppColors.background,
-        onBackground: AppColors.textPrimary,
       ),
       scaffoldBackgroundColor: AppColors.background,
       
@@ -84,9 +82,9 @@ class AppTheme {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           elevation: 0,
         ).copyWith(
-          overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
+          overlayColor: WidgetStateProperty.resolveWith<Color?>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) {
                 return Colors.white.withOpacity(0.1);
               }
               return null;

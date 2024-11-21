@@ -178,7 +178,7 @@ class _SignupFormScreenState extends State<SignupFormScreen> {
                       password: _passwordController.text,
                       firstName: _firstNameController.text,
                       lastName: _lastNameController.text,
-                      phone: _phoneController.text,
+                      phoneNumber: _phoneController.text,
                       address: _addressController.text,
                       birthDate: _selectedDate,
                       gender: _selectedGender,

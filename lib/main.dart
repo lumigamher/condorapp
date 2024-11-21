@@ -86,18 +86,18 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             initialRoute: _getInitialRoute(authProvider),
             routes: {
-              '/': (context) => SplashScreen(),
-              '/login': (context) => LoginScreen(),
-              '/register': (context) => RegisterScreen(),
-              '/signup_form': (context) => SignupFormScreen(),
-              '/chat': (context) => ChatScreen(),
+              '/': (context) => const SplashScreen(),
+              '/login': (context) => const LoginScreen(),
+              '/register': (context) => const RegisterScreen(),
+              '/signup_form': (context) => const SignupFormScreen(),
+              '/chat': (context) => const ChatScreen(),
             },
             // Middleware para proteger rutas
             onGenerateRoute: (settings) {
               // Si la ruta requiere autenticación y el usuario no está autenticado
               if (_requiresAuth(settings.name) && !authProvider.isAuthenticated) {
                 return MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
+                  builder: (context) => const LoginScreen(),
                 );
               }
               return null;

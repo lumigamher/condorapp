@@ -73,8 +73,8 @@ class AuthProvider with ChangeNotifier {
       notifyListeners();
 
       final response = await authAPI.signup(user);
-      if (response.statusCode == 200) {
-        _error = null;
+      
+      if (response.statusCode == 200 && response.data['success'] == true) {
         return true;
       } else {
         _error = response.data['message'] ?? "Error en el registro";
@@ -121,7 +121,6 @@ class AuthProvider with ChangeNotifier {
       _isAuthenticated = _token.isNotEmpty;
       
       if (_isAuthenticated) {
-        // Aquí podrías cargar los datos del usuario si es necesario
         // await loadUserData();
       }
 
